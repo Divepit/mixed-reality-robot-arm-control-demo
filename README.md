@@ -48,7 +48,7 @@ The object used for the Pick and Place demo also requires a QR code to be attach
 2. Clone the following repositories into the same catkin_ws
 ```
 cd ~/catkin_ws/src
-git clone --branch noetic-devel git@github.com:Kinovarobotics/kinova-ros.git
+git clone --branch noetic-devel https://github.com/Divepit/kinova-ros.git
 git clone git@github.com:Unity-Technologies/ROS-TCP-Endpoint.git
 ```
 3. Open `kinova-ros/kinova_bringup/launch/config/robot_parameters.yaml` in your favorite text editor, and change the `connection_type` parameter from `USB` to `Ethernet` (line 13)
