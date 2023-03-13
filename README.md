@@ -49,7 +49,7 @@ The object used for the Pick and Place demo also requires a QR code to be attach
 ```
 cd ~/catkin_ws/src
 git clone https://github.com/Divepit/kinova-ros.git
-git clone git@github.com:Unity-Technologies/ROS-TCP-Endpoint.git
+git clone https://github.com/Unity-Technologies/ROS-TCP-Endpoint.git
 ```
 3. Open `kinova-ros/kinova_bringup/launch/config/robot_parameters.yaml` in your favorite text editor, and change the `connection_type` parameter from `USB` to `Ethernet` (line 13)
 4. Make sure you have [rosdep](http://wiki.ros.org/rosdep) installed and configured and use it to install the required dependencies
