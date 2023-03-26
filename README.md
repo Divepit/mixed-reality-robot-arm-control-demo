@@ -62,6 +62,27 @@ rosdep install --from-paths src --ignore-src -r -y
  
 If the robot is connected correctly and the setup was successful, you should be able to set a pose goal using the rviz interface and the robot will move to that position once `plan and execute` is pressed.
 
+## Possible Issues
+
+### Catkin build error
+The following error can appear when running ```catkin build``` and using different python versions:
+
+```
+Errors     << catkin_tools_prebuild:cmake /home/colin/3dVision/visionPipeline/logs/catkin_tools_prebuild/build.cmake.000.log
+CMake Error at /opt/ros/noetic/share/catkin/cmake/empy.cmake:30 (message):
+  Unable to find either executable 'empy' or Python module 'em'...  try
+  installing the package 'python3-empy'
+Call Stack (most recent call first):
+  /opt/ros/noetic/share/catkin/cmake/all.cmake:164 (include)
+  /opt/ros/noetic/share/catkin/cmake/catkinConfig.cmake:20 (include)
+  CMakeLists.txt:4 (find_package)
+```
+The following build flag may solve the problem:
+```
+catkin build -DPYTHON_EXECUTABLE=/usr/bin/python3 -DPYTHON_INCLUDE_DIR=/usr/include/python3.7m
+```
+
+
 ## Usage
 This section aims to provide a brief guide on how to use the core functions of the Mixed Reality experience.
 
