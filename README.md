@@ -61,6 +61,10 @@ rosdep install --from-paths src --ignore-src -r -y
 ```
 sudo apt-get install ros-noetic-moveit ros-noetic-trac-ik-kinematics-plugin ros-noetic-ros-control ros-noetic-ros-controllers
 ```
+Note: If the controller does not work the following package might help:
+```
+sudo apt-get install ros-noetic-pr2-arm-kinematics
+```
 6. Build and source the workspace with `catkin build && source devel/setup.bash`
 7. Test the setup by running `roslaunch mrirac kinova_real.launch` or alternatively (if you don't have a Kinova arm available or setup) you can launch the Gazebo simulation using `bash MRIRAC_ROS/mrirac/launch_sim.bash`.
  
