@@ -70,6 +70,34 @@ sudo apt-get install ros-noetic-pr2-arm-kinematics
  
 If the robot is connected correctly and the setup was successful, you should be able to set a pose goal using the rviz interface and the robot will move to that position once `plan and execute` is pressed.
 
+## Debug C++ and Python with VSCode
+install VSCode extension ROS (id: ms-iot.vscode-ros)
+
+in the .vscode folder create a launch.json file and add following code:
+```
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        
+        {
+            "name": "ROS: Attach",
+            "request": "attach",
+            "type": "ros"
+        }
+    ]
+ }
+```
+
+ROS has to be running to start debugging.
+
+open the Run and Debug menue and run "ROS: Attach". Select the language and the process you want to debug
+
+
+Additional information under: https://github.com/ms-iot/vscode-ros/blob/master/doc/debug-support.md#launch
+
 ## Possible Issues
 
 ### Catkin build error
