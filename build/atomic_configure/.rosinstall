@@ -1,0 +1,2 @@
+- setup-file:
+    local-name: /home/rosnoetic/git/mixed-reality-robot-arm-control-demo/build/devel/setup.sh
