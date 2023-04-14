@@ -1,6 +1,6 @@
 <launch>
-    <include file="$(find kinova_gazebo)/launch/robot_launch.launch"/>
     <include file="$(find mrirac)/launch/kinova_sim.launch"/>
+    <include file="$(find kinova_gazebo)/launch/robot_launch.launch"/>
     <include file="$(find cvnode)/launch/cameranode.launch"/>
     <include file="$(find sdc_interaction)/launch/interaction.launch"/>
 </launch>
