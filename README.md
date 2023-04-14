@@ -16,6 +16,7 @@ The launchfile used for our project can be accessed as follows:
 roslaunch mrirac 3d_vision_project.launch
 ```
 
+The launchfile simply launches the old launchfiles which have been used in the original mixed-reality-robot-arm-control-demo repo as well as our new launchfiles for the vision and interaction packages.
 
 ## Installation issues
 
