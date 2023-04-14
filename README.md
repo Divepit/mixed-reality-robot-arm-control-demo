@@ -4,6 +4,28 @@ Programming industrial robot arms can be a tedious and unintuitive process with 
 
 This repository contains both a Unity application and ROS packages that enable users to control a Kinova Jaco 2 robot arm using the Microsoft HoloLens 2 through a Mixed Reality experience. Besides being able to intuitively set pose targets for the robot directly in task space, there is also a demonstration for planning a simple pick and place task. Furthermore, the application utilizes the spatial awareness capabilities of the HoloLens 2 to provide information on obstacles that are in the robot workspace, enabling collision-aware motion planning of robot movements.
 
+# 3D Vision Project README.md Update
+
+This repo is a fork of the original mixed-reality-robot-arm-control-demo repo. Here we added and changed some things for our 3D Vision course project. Below, before the original content of this readme (starting at "Installation"), we added some notes on what is needed to make the repo work for our application.
+
+## Launchfile Update 
+
+The launchfile used for our project can be accessed as follows:
+
+```sh
+roslaunch mrirac 3d_vision_project.launch
+```
+
+
+## Installation issues
+
+In the installation instructions below, the following shell commands are missing in order to get the repo running. They can be run at any time during the process described below. They just install some missing apt packages:
+
+```sh
+sudo apt-get install ros-noetic-moveit ros-noetic-trac-ik-kinematics-plugin ros-noetic-ros-control ros-noetic-ros-controllers
+```
+
+# Original README.md 
 ## Installation
 ### Hardware
 Required hardware:
