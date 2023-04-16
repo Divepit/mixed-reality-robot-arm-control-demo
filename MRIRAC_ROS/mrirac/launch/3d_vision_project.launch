@@ -1,4 +1,19 @@
 <launch>
+
+    <!-- these are the arguments you can pass this launch file, for example paused:=true -->  
+    <arg name="kinova_robotType" default="j2n6s300"/>
+    <arg name="kinova_robotName" default="$(arg kinova_robotType)"/>
+    <arg name="paused" default="false"/>
+    <arg name="use_sim_time" default="true"/>
+    <arg name="gui" default="true"/>
+    <arg name="headless" default="false"/>
+    <arg name="debug" default="false"/>
+    <arg name="use_trajectory_controller" default="true"/>
+    <arg name="is7dof" default="false"/>
+    <arg name="rqt" default="false"/>
+    <arg name="has2finger" default="false"/>
+    <arg name="description_name" default="robot_description"/> <!-- allows remapping of robot_description into a namespace -->
+    
     <include file="$(find kinova_gazebo)/launch/robot_launch.launch"/>
     <include file="$(find mrirac)/launch/kinova_sim.launch"/>
     <include file="$(find cvnode)/launch/cameranode.launch"/>
