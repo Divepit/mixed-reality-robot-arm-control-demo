@@ -18,6 +18,20 @@ roslaunch mrirac 3d_vision_project.launch
 
 The launchfile simply launches the old launchfiles which have been used in the original mixed-reality-robot-arm-control-demo repo as well as our new launchfiles for the vision and interaction packages.
 
+### Bash script for launching
+Create in the workspace folder a NAME.sh file and paste the following lines into it
+```
+#!/bin/bash
+
+catkin build
+source devel/setup.bash
+roslaunch mrirac 3d_vision_project.launch
+```
+Launch the script with
+```
+bash NAME.sh
+```
+
 ## Installation issues
 
 In the installation instructions below, the following shell commands are missing in order to get the repo running. They can be run at any time during the process described below. They just install some missing apt packages:
