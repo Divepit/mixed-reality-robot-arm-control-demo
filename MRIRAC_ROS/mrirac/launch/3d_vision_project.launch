@@ -14,6 +14,7 @@
     <arg name="has2finger" default="false"/>
     <arg name="description_name" default="robot_description"/> <!-- allows remapping of robot_description into a namespace -->
     
+    <include file="$(find mrirac)/launch/kinova_sim.launch"/>
     <include file="$(find kinova_gazebo)/launch/robot_launch.launch"/>
     <include file="$(find cvnode)/launch/cameranode.launch"/>
     <include file="$(find sdc_interaction)/launch/interaction.launch"/>
