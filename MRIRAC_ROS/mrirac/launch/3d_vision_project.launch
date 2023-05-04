@@ -13,6 +13,8 @@
     <arg name="rqt" default="false"/>
     <arg name="has2finger" default="false"/>
     <arg name="description_name" default="robot_description"/> <!-- allows remapping of robot_description into a namespace -->
+
+    <node pkg="tf2_ros" type="buffer_server" name="tf_buffer" args="25.0"/>
     
     <include file="$(find mrirac)/launch/kinova_sim.launch"/>
     <include file="$(find kinova_gazebo)/launch/robot_launch.launch"/>
