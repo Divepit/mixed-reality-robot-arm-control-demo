@@ -97,6 +97,10 @@ rosdep install --from-paths src --ignore-src -r -y
 5. Run the following command to install missing dependencies for the controllers:
 ```
 sudo apt-get install ros-noetic-moveit ros-noetic-trac-ik-kinematics-plugin ros-noetic-ros-control ros-noetic-ros-controllers
+
+pip install -U scikit-learn
+
+pip install numpy -U
 ```
 Note: If the controller does not work the following package might help:
 ```
