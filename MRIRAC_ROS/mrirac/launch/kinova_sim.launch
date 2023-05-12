@@ -4,7 +4,7 @@
     <node name="mrirac_trajectory_planner" pkg="mrirac" type="trajectory_planner_node" output="screen" >
         <param name="simulation" type="bool" value="true" />
     </node>
-    <node name="mrirac_pick_and_place" pkg="mrirac_pick_and_place" type="pick_and_place_node" output="screen" >
+    <!-- <node name="mrirac_pick_and_place" pkg="mrirac_pick_and_place" type="pick_and_place_node" output="screen" >
         <param name="simulation" type="bool" value="true" />
-    </node>
+    </node> -->
 </launch>

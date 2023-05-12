@@ -86,6 +86,8 @@ TrajectoryPlannerNode::TrajectoryPlannerNode(const ros::NodeHandle &node_handle)
   spatial_obstacle_sub_ = node_handle_.subscribe("unity_spatial_obstacles", 100, &TrajectoryPlannerNode::UpdateSpatialObstacles, this);
 
   n_obstacles_pub_ = node_handle_.advertise<std_msgs::String>("n_obstacles", 100);
+  move_group_interface_.setGoalTolerance(0.075);
+  move_group_interface_.setPlanningTime(15.0);
 }
 
 TrajectoryPlannerNode::~TrajectoryPlannerNode()
@@ -97,7 +99,6 @@ bool TrajectoryPlannerNode::PlanTrajectory(mrirac_msgs::TrajectoryPlan::Request 
   ROS_INFO("received pose");
   target_pose_ = req.target_pose;
   moveit::planning_interface::MoveGroupInterface::Plan motion_plan;
-
   bool success = RobotMovements::PlanMovementToPose(req.target_pose, move_group_interface_, motion_plan);
 
   if (success)
@@ -121,7 +122,10 @@ bool TrajectoryPlannerNode::ExecuteTrajectory(std_srvs::Empty::Request &req, std
 {
   if (trajectory_planned_)
   {
-    RobotMovements::ExecutePlannedTrajectory(move_group_interface_, current_plan_, target_pose_, !simulation, pose_correction_action_client_);
+    // RobotMovements::ExecutePlannedTrajectory(move_group_interface_, current_plan_, target_pose_, !simulation, pose_correction_action_client_);
+    move_group_interface_.asyncExecute(current_plan_);
+
+
     trajectory_planned_ = false;
   }
   else
