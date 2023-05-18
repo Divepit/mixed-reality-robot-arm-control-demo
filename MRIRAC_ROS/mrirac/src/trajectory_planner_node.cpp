@@ -99,6 +99,7 @@ bool TrajectoryPlannerNode::PlanTrajectory(mrirac_msgs::TrajectoryPlan::Request 
   ROS_INFO("received pose");
   target_pose_ = req.target_pose;
   moveit::planning_interface::MoveGroupInterface::Plan motion_plan;
+
   bool success = RobotMovements::PlanMovementToPose(req.target_pose, move_group_interface_, motion_plan);
 
   if (success)
@@ -123,9 +124,7 @@ bool TrajectoryPlannerNode::ExecuteTrajectory(std_srvs::Empty::Request &req, std
   if (trajectory_planned_)
   {
     // RobotMovements::ExecutePlannedTrajectory(move_group_interface_, current_plan_, target_pose_, !simulation, pose_correction_action_client_);
-    move_group_interface_.asyncExecute(current_plan_);
-    move_group_interface_.stop();
-
+    move_group_interface_.execute(current_plan_);
 
     trajectory_planned_ = false;
   }
