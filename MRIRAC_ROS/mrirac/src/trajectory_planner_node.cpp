@@ -125,6 +125,7 @@ bool TrajectoryPlannerNode::ExecuteTrajectory(std_srvs::Empty::Request &req, std
   {
     // RobotMovements::ExecutePlannedTrajectory(move_group_interface_, current_plan_, target_pose_, !simulation, pose_correction_action_client_);
     move_group_interface_.execute(current_plan_);
+    move_group_interface_.stop();
 
     trajectory_planned_ = false;
   }
