@@ -1,12 +1,113 @@
-# Mixed Reality Industrial Robot Arm Control
-
-Programming industrial robot arms can be a tedious and unintuitive process with conventional control methods, such as joysticks or 2D GUIs.
-
-This repository contains both a Unity application and ROS packages that enable users to control a Kinova Jaco 2 robot arm using the Microsoft HoloLens 2 through a Mixed Reality experience. Besides being able to intuitively set pose targets for the robot directly in task space, there is also a demonstration for planning a simple pick and place task. Furthermore, the application utilizes the spatial awareness capabilities of the HoloLens 2 to provide information on obstacles that are in the robot workspace, enabling collision-aware motion planning of robot movements.
-
 # 3D Vision Project README.md Update
 
-This repo is a fork of the original mixed-reality-robot-arm-control-demo repo. Here we added and changed some things for our 3D Vision course project. Below, before the original content of this readme (starting at "Installation"), we added some notes on what is needed to make the repo work for our application.
+This repo is a fork of the original mixed-reality-robot-arm-control-demo repo. Here we added and changed some things for our 3D Vision course project. Please follow the setup
+
+[![Simulation recording using the Vision Node](https://img.youtube.com/vi/wjF8KKtaHz8/maxresdefault.jpg)](https://youtu.be/wjF8KKtaHz8)   [![Simulation recording using the Ground Truth](https://img.youtube.com/vi/6sPL96CTOs0/maxresdefault.jpg)](https://youtu.be/6sPL96CTOs0)
+
+The left video uses the Obstacle detection node while the right uses 
+## Setup
+0. Setup a ROS noetic workspace with following [guide](http://wiki.ros.org/catkin/Tutorials/)
+1. In the src/ folder of a new or existing catkin_ws, clone this repository
+2. Clone the following repositories into the same catkin_ws
+```
+cd ~/catkin_ws/src
+git clone https://github.com/Divepit/kinova-ros.git
+git clone https://github.com/Divepit/3d-vision-sugical-data-collection-interaction-package.git
+git clone https://github.com/Divepit/3d-vision-sugical-data-collection-vision-package.git
+```
+3. Open `kinova-ros/kinova_bringup/launch/config/robot_parameters.yaml` in your favorite text editor, and change the `connection_type` parameter from `USB` to `Ethernet` (line 13)
+4. Make sure you have [rosdep](http://wiki.ros.org/rosdep) installed and configured and use it to install the required dependencies
+```
+cd ~/catkin_ws
+rosdep install --from-paths src --ignore-src -r -y
+```
+5. Run the following command to install missing dependencies for the controllers:
+```
+sudo apt-get install ros-noetic-moveit ros-noetic-trac-ik-kinematics-plugin ros-noetic-ros-control ros-noetic-ros-controllers
+
+pip install -U scikit-learn
+
+pip install numpy -U
+```
+Note: If the controller does not work the following package might help:
+```
+sudo apt-get install ros-noetic-pr2-arm-kinematics
+```
+6. Build and source the workspace with `catkin build && source devel/setup.bash`. When building for the first time or after a clean please perform this step [First Time Build](#first-time-build)
+
+7. You can now launch the Gazebo simulation using `roslaunch mrirac 3d_vision_project.launch`.
+ 
+ In case the of problems please refer to [Possibel Issues](#possible-issues) or check the [Interaction Package](https://github.com/Divepit/3d-vision-sugical-data-collection-interaction-package/tree/master) README.
+
+## Debug C++ and Python with VSCode
+install VSCode extension ROS (id: ms-iot.vscode-ros)
+
+in the .vscode folder create a launch.json file and add following code:
+```
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        
+        {
+            "name": "ROS: Attach",
+            "request": "attach",
+            "type": "ros"
+        }
+    ]
+ }
+```
+
+ROS has to be running to start debugging.
+
+open the Run and Debug menue and run "ROS: Attach". Select the language and the process you want to debug
+
+
+Additional information under: https://github.com/ms-iot/vscode-ros/blob/master/doc/debug-support.md#launch
+
+## Possible Issues
+
+### Catkin Build Brror
+The following error can appear when running ```catkin build``` and using different python versions:
+
+```
+Errors     << catkin_tools_prebuild:cmake /home/colin/3dVision/visionPipeline/logs/catkin_tools_prebuild/build.cmake.000.log
+CMake Error at /opt/ros/noetic/share/catkin/cmake/empy.cmake:30 (message):
+  Unable to find either executable 'empy' or Python module 'em'...  try
+  installing the package 'python3-empy'
+Call Stack (most recent call first):
+  /opt/ros/noetic/share/catkin/cmake/all.cmake:164 (include)
+  /opt/ros/noetic/share/catkin/cmake/catkinConfig.cmake:20 (include)
+  CMakeLists.txt:4 (find_package)
+```
+The following build flag may solve the problem:
+```
+catkin build -DPYTHON_EXECUTABLE=/usr/bin/python3 -DPYTHON_INCLUDE_DIR=/usr/include/python3.7m
+```
+
+### First Time Build 
+
+If an error like the following appears when running `catkin build`:
+
+```bash
+fatal error: sdc_interaction/UpdateVoxelDome.h: No such file or directory
+    5 | #include <sdc_interaction/UpdateVoxelDome.h>
+
+```
+
+It is necessary to go into the file `CMakeLists.txt` and comment out the following two lines:
+
+```cmake
+add_executable(voxel_dome_generator_node src/voxel_dome_generator_node.cpp)
+target_link_libraries(voxel_dome_generator_node ${catkin_LIBRARIES})
+
+```
+
+Once they are commented out, run `catkin build` again. If it is successful, uncomment the two lines again and re-run `catkin build`. There was no better fix found for this so far.
+
+
 
 ## Launchfile Update 
 
@@ -32,15 +133,12 @@ Launch the script with
 bash NAME.sh
 ```
 
-## Installation issues
-
-In the installation instructions below, the following shell commands are missing in order to get the repo running. They can be run at any time during the process described below. They just install some missing apt packages:
-
-```sh
-sudo apt-get install ros-noetic-moveit ros-noetic-trac-ik-kinematics-plugin ros-noetic-ros-control ros-noetic-ros-controllers
-```
-
 # Original README.md 
+## Mixed Reality Industrial Robot Arm Control
+
+Programming industrial robot arms can be a tedious and unintuitive process with conventional control methods, such as joysticks or 2D GUIs.
+
+This repository contains both a Unity application and ROS packages that enable users to control a Kinova Jaco 2 robot arm using the Microsoft HoloLens 2 through a Mixed Reality experience. Besides being able to intuitively set pose targets for the robot directly in task space, there is also a demonstration for planning a simple pick and place task. Furthermore, the application utilizes the spatial awareness capabilities of the HoloLens 2 to provide information on obstacles that are in the robot workspace, enabling collision-aware motion planning of robot movements.
 ## Installation
 ### Hardware
 Required hardware:
