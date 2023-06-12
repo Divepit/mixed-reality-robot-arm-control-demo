@@ -6,16 +6,15 @@ This repo is a fork of the original mixed-reality-robot-arm-control-demo repo. H
 
 The left video uses the Obstacle detection node while the right uses 
 ## Setup
-0. Setup a ROS noetic workspace with following [guide](http://wiki.ros.org/catkin/Tutorials/)
-1. In the src/ folder of a new or existing catkin_ws, clone this repository
-2. Clone the following repositories into the same catkin_ws
+1. Setup a ROS noetic workspace with following [guide](http://wiki.ros.org/catkin/Tutorials/)
+2. In the src/ folder of a new or existing catkin_ws, clone this repository
+3. Clone the following repositories into the same catkin_ws
 ```
 cd ~/catkin_ws/src
 git clone https://github.com/Divepit/kinova-ros.git
 git clone https://github.com/Divepit/3d-vision-sugical-data-collection-interaction-package.git
 git clone https://github.com/Divepit/3d-vision-sugical-data-collection-vision-package.git
 ```
-3. Open `kinova-ros/kinova_bringup/launch/config/robot_parameters.yaml` in your favorite text editor, and change the `connection_type` parameter from `USB` to `Ethernet` (line 13)
 4. Make sure you have [rosdep](http://wiki.ros.org/rosdep) installed and configured and use it to install the required dependencies
 ```
 cd ~/catkin_ws
