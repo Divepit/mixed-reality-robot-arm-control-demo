@@ -4,9 +4,9 @@ This repo is a fork of the original mixed-reality-robot-arm-control-demo repo. H
 
 [![Simulation recording using the Vision Node](https://img.youtube.com/vi/wjF8KKtaHz8/maxresdefault.jpg)](https://youtu.be/wjF8KKtaHz8)   [![Simulation recording using the Ground Truth](https://img.youtube.com/vi/6sPL96CTOs0/maxresdefault.jpg)](https://youtu.be/6sPL96CTOs0)
 
-The left video uses the Obstacle detection node while the right uses 
+The first video uses the obstacle detection node while the second video shows the performance using the ground truth.
 ## Setup
-1. Setup a ROS noetic workspace with following [guide](http://wiki.ros.org/catkin/Tutorials/)
+1. Setup a ROS noetic workspace with following [guide](http://wiki.ros.org/catkin/Tutorials/create_a_workspace)
 2. In the src/ folder of a new or existing catkin_ws, clone this repository
 3. Clone the following repositories into the same catkin_ws
 ```
