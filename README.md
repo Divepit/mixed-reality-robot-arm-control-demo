@@ -37,6 +37,86 @@ sudo apt-get install ros-noetic-pr2-arm-kinematics
 7. You can now launch the Gazebo simulation using `roslaunch mrirac 3d_vision_project.launch`.
  
  In case the of problems please refer to [Possibel Issues](#possible-issues) or check the [Interaction Package](https://github.com/Divepit/3d-vision-sugical-data-collection-interaction-package/tree/master) README.
+ 
+## Controls during the Simulation
+### Optional Packages
+To easily call services, it is easiest if you use rqt. To install rqt use the following command:
+
+```sh
+sudo apt-get install ros-noetic-rqt-common-plugins
+```
+
+In order to easily call services, first start the whole pipeline and once the rosmaster is running, open rqt as follows:
+
+```sh
+rosrun rqt_service_caller rqt_service_caller
+```
+### Change Target Coordinates
+To call the `change_target_coordinate` service and update the target coordinate, use the following command:
+   
+```bash
+rosservice call /change_target_coordinate "{new_coordinate: {x: 4.0, y: 0.0, z: 1.75}}"
+```
+
+Adjust the `x`, `y`, and `z` values as needed.
+
+  The service should respond with a success message, indicating that the target coordinate has been updated.
+
+### Update Voxel Dome Service
+
+The node provides a service named /update_voxel_dome that allows you to update the parameters of the voxel dome. The service takes the following arguments:
+
+* `radius` (float64): The radius of the half-dome.
+* `voxel_count` (int32): The number of voxels filling the half-dome.
+* `scaling_factor` (float64): A factor to scale the size of the individual voxels. A value less than `1.0` will create space between the voxels.
+
+The service returns a boolean success indicating if the operation was successful and a message providing additional information about the result.
+
+#### Usage
+
+After starting the Voxel Dome Generator node, you can call the /update_voxel_dome service using the rosservice command-line tool. Here's an example:
+
+``` bash
+rosservice call /update_voxel_dome "radius: 2.0
+voxel_count: 200
+scaling_factor: 0.9"
+```
+
+This command updates the voxel dome's radius to `2.0`, the number of voxels to `200`, and sets the scaling factor to `0.9`, which will result in smaller voxels with more space between them.
+
+You can adjust these values as needed to generate a voxel dome with the desired size and density.
+
+### Sphere Obstacle Publisher Node
+
+Four different obstacle behaviours can be set in the `config.yaml` file:
+``` yaml
+use_dynamic_obstacle: boolean
+
+replan_trigger_obstacle: boolean
+replan_trigger_interval: int [s]
+
+replan_trigger_square: boolean
+replan_trigger_square_bound_x: float
+replan_trigger_square_bound_y: float
+replan_trigger_square_offset_z: float
+```
+
+1. If all booleans are set to false, the obstacle locations can be changes using the `change_obstacles` service.
+2. If only `use_dynamic_obstacle` is set to true, a sphere circling about the target is rendered into simulation.
+3. If only `replan_trigger_obstacle` is set to true, every `replan_trigger_interval` seconds, an obstacle between the current camera and target position is rendered.
+4. If only `replan_trigger_square` is set to true, a sphere will be rendered `replan_trigger_square_offset_z` above the target in a square with bounds `replan_trigger_square_bound_x` and `replan_trigger_square_bound_y`.
+
+### Change Obstacles Service
+To change the obstacles, call the `change_obstacles` service with a list of `Sphere` messages. Here's an example of how to call the service using the `rosservice` command-line tool:
+
+``` bash
+rosservice call /change_obstacles "obstacles: {spheres: [{center: {x: 2.0, y: 0.0, z: 1.0}, radius: 0.125}, {center: {x: 2.0, y: 1.0, z: 1.0}, radius: 0.125}]}"
+```
+
+This command updates the list of obstacles with two spheres. The first sphere has its center at `(2.0, 0.0, 1.0)` and a radius of `0.125`. The second sphere has its center at `(2.0, 1.0, 1.0)` and a radius of `0.125`.
+
+You can also change the obstacles programmatically in another ROS node by creating a client for the `change_obstacles` service and sending the new list of spheres.
+
 
 ## Debug C++ and Python with VSCode
 install VSCode extension ROS (id: ms-iot.vscode-ros)
