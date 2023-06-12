@@ -1,6 +1,6 @@
 # 3D Vision Project README.md Update
 
-This repo is a fork of the original mixed-reality-robot-arm-control-demo repo. Here we added and changed some things for our 3D Vision course project. Please follow the [Setup steps](#setup). The report is also in this repository under the name report.pdf
+This repo is a fork of the original mixed-reality-robot-arm-control-demo repo. Here we added and changed some things for our 3D Vision course project. Please follow the [Setup steps](#setup). The report is also in this repository [report](Final_Report_3DV_Autonomous_Data_Collection_for_Surgical_Procedures.pdf)
 
 [![Simulation recording using the Vision Node](https://img.youtube.com/vi/wjF8KKtaHz8/maxresdefault.jpg)](https://youtu.be/wjF8KKtaHz8)   [![Simulation recording using the Ground Truth](https://img.youtube.com/vi/6sPL96CTOs0/maxresdefault.jpg)](https://youtu.be/6sPL96CTOs0)
 
